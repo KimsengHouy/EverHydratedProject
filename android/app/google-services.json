@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134036477806",
+    "project_id": "evertech-690d0",
+    "storage_bucket": "evertech-690d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134036477806:android:ef51a1f056055e6183537f",
+        "android_client_info": {
+          "package_name": "com.everhydratedproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134036477806-c6uumd8g9vipe1s59r3ehbe7ojes13so.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE_XqbFZV90zr7AP1_Pr6Aj14kNoF8P-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134036477806-c6uumd8g9vipe1s59r3ehbe7ojes13so.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
