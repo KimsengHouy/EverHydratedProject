@@ -23,6 +23,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AddRemoveButton} from '../../components/AddRemoveButton';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {mLToCups} from '../../utils/convertion';
+import {getUser} from '../../utils/database';
 
 const amounts = [250, 500, 1000, 1500];
 
@@ -51,21 +53,15 @@ const renderConfetti = () => {
   return <ConfettiCannon count={100} origin={{x: 0, y: 0}} fadeOut={true} />;
 };
 
-const HomeScreen = () => {
+const HomeScreen = async () => {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const getUser = async () => {
-    const User = await firestore()
-      .collection('users')
-      .doc(auth().currentUser.uid)
-      .get()
-      .then(documentSnapshot => {
-        if (documentSnapshot.exists) {
-          console.log('User Data', documentSnapshot.data());
-          setUserData(documentSnapshot.data());
-        }
-      });
-  };
+
+  const userSnapshot = await getUser();
+  if (userSnapshot.exists) {
+    console.log('User Data', userSnapshot.data());
+    setUserData(userSnapshot.data());
+  }
 
   useEffect(() => {
     getUser();
@@ -87,6 +83,8 @@ const HomeScreen = () => {
   const [waterDrank, setWaterDrank] = useState(0);
   const [isGoalAchieved, setIsGoalAchieved] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+
+  const updatewaterGoal = () => {};
 
   // Progress Bar Animation
   const barHeight = useRef(new Animated.Value(0)).current;
@@ -171,7 +169,8 @@ const HomeScreen = () => {
           <View
             style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
             <Text style={[styles.grayText, {fontSize: 26}]}>
-              {waterGoal} mL{' '}
+              {mLToCups(waterGoal, userData.unit)}{' '}
+              {userData ? userData.unit : 'mL'}{' '}
             </Text>
             {/* Add Goal */}
             <TouchableOpacity
@@ -199,7 +198,8 @@ const HomeScreen = () => {
           <View style={{justifyContent: 'center'}}>
             <Text style={[styles.grayText, {fontSize: 28}]}>You've drunk</Text>
             <Text style={[styles.blueText, {fontSize: 42}]}>
-              {waterDrank} mL
+              {mLToCups(waterDrank, userData.unit)}{' '}
+              {userData ? userData.unit : 'mL'}{' '}
             </Text>
             <Text style={[styles.grayText, {fontSize: 28}]}>
               of water today.
@@ -227,6 +227,7 @@ const HomeScreen = () => {
                 amount={amount}
                 value={waterDrank}
                 setValue={setWaterDrank}
+                unitType={userData.unit}
                 operation="add"
               />
             );
@@ -242,6 +243,7 @@ const HomeScreen = () => {
                 amount={amount}
                 value={waterDrank}
                 setValue={setWaterDrank}
+                unitType={userData.unit}
                 operation="remove"
               />
             );
