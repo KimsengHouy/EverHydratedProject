@@ -2,10 +2,12 @@ import React, {useRef} from 'react';
 import {View, TouchableOpacity, Text, Animated} from 'react-native';
 import {RotationGestureHandler} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {mLToCups} from '../utils/convertion';
 
 export const AddRemoveButton = ({
   amount,
   value,
+  unitType,
   setValue,
   operation = 'add',
 }) => {
@@ -69,7 +71,9 @@ export const AddRemoveButton = ({
           />
         </Animated.View>
       </View>
-      <Text style={{color: '#5a595b', fontWeight: '600'}}>{amount} mL</Text>
+      <Text style={{color: '#5a595b', fontWeight: '600'}}>
+        {mLToCups(amount, unitType)} {unitType ? unitType : 'mL'}{' '}
+      </Text>
     </TouchableOpacity>
   );
 };

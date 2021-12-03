@@ -21,25 +21,21 @@ import Animated from 'react-native-reanimated';
 import ImagePicker from 'react-native-image-crop-picker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {Picker} from '@react-native-picker/picker';
+import {getUser} from '../../utils/database';
 
-const EditProfileScreen = () => {
+const EditProfileScreen = async () => {
   const [uploading, setUploading] = useState(false);
   const [userData, setUserData] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [image, setImage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
-  const getUser = async () => {
-    const User = await firestore()
-      .collection('users')
-      .doc(auth().currentUser.uid)
-      .get()
-      .then(documentSnapshot => {
-        if (documentSnapshot.exists) {
-          console.log('User Data', documentSnapshot.data());
-          setUserData(documentSnapshot.data());
-        }
-      });
-  };
+  const userSnapshot = await getUser();
+  if (userSnapshot.exists) {
+    console.log('User Data', userSnapshot.data());
+    setUserData(userSnapshot.data());
+  }
 
   const handleUpdate = async () => {
     let imgUrl = await uploadImage();
@@ -47,22 +43,22 @@ const EditProfileScreen = () => {
     if (imgUrl == null && userData.userImg) {
       imgUrl = userData.userImg;
     }
+    console.log(userData, 'user11');
+    console.log(imgUrl, 'image');
     firestore()
       .collection('users')
       .doc(auth().currentUser.uid)
       .update({
-        fullname: userData.fullname,
-        taguser: userData.taguser,
-        age: userData.age,
-        phone: userData.phone,
-        country: userData.country,
-        climate: userData.climate,
-        unit: userData.unit,
-        activetime: userData.activetime,
-        userImg: imgUrl,
+        fullname: userData.fullname ? userData.fullname : '',
+        taguser: userData.taguser ? userData.taguser : '',
+        age: userData.age ? userData.age : '',
+        climate: userData.climate ? userData.climate : '',
+        unit: userData.unit ? userData.unit : 'mL',
+        userImg: imgUrl ? imgUrl : '',
       })
-      .then(() => {
-        console.log('User Updated!');
+      .then(data => {
+        console.log('User Updated!', data);
+
         Alert.alert(
           'Profile Updated!',
           'Your profile has been updated successfully.',
@@ -301,29 +297,6 @@ const EditProfileScreen = () => {
           </View>
 
           <View style={styles.action}>
-            <FontAwesome name="phone" size={20} />
-            <TextInput
-              style={{marginTop: -10, marginLeft: 5}}
-              placeholder="Phone"
-              placeholderTextColor="#666666"
-              keyboardType="number-pad"
-              autoCorrect={false}
-              value={userData ? userData.phone : ''}
-              onChangeText={txt => setUserData({...userData, phone: txt})}
-            />
-          </View>
-          <View style={styles.action}>
-            <FontAwesome name="globe" size={20} />
-            <TextInput
-              style={{marginTop: -10, marginLeft: 5}}
-              placeholder="Country"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.country : ''}
-              onChangeText={txt => setUserData({...userData, country: txt})}
-            />
-          </View>
-          <View style={styles.action}>
             <Icon name="weather-cloudy" size={20} />
             <TextInput
               style={{marginTop: -10, marginLeft: 5}}
@@ -334,28 +307,19 @@ const EditProfileScreen = () => {
               onChangeText={txt => setUserData({...userData, climate: txt})}
             />
           </View>
-          <View style={styles.action}>
-            <Icon name="filter-menu-outline" size={20} />
-            <TextInput
-              style={{marginTop: -10, marginLeft: 5}}
-              placeholder="Unit"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.unit : ''}
-              onChangeText={txt => setUserData({...userData, unit: txt})}
-            />
+          <View>
+            <Picker
+              selectedValue={userData.unit}
+              onValueChange={(itemValue, itemIndex) => {
+                console.log(itemValue, 'itm', itemIndex, 'idex');
+                console.log(userData, 'data');
+                return setUserData({...userData, unit: itemValue});
+              }}>
+              <Picker.Item label="mL" value="mL" />
+              <Picker.Item label="cup" value="cups" />
+            </Picker>
           </View>
-          <View style={styles.action}>
-            <Icon name="timer-outline" size={20} />
-            <TextInput
-              style={{marginTop: -10, marginLeft: 5}}
-              placeholder="Active Time"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.activetime : ''}
-              onChangeText={txt => setUserData({...userData, activetime: txt})}
-            />
-          </View>
+
           <TouchableOpacity style={styles.commandButton} onPress={handleUpdate}>
             <Text style={styles.panelButtonTitle}>Submit</Text>
           </TouchableOpacity>

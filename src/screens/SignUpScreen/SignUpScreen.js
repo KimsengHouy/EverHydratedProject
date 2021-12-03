@@ -19,6 +19,8 @@ import AddProfileScreen from '../AddProfileScreen';
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [age, setAge] = useState('');
   const [confrimPassword, setConfrimPassword] = useState('');
 
   const {height} = useWindowDimensions();
@@ -28,7 +30,7 @@ const SignUpScreen = () => {
   const onSignUpPressed = () => {
     if (email != '' && password != '' && confrimPassword != '') {
       if (password == confrimPassword) {
-        signUp(email, password);
+        signUp(email, password, fullname, age);
       } else {
         Alert.alert('password did not match');
       }
@@ -61,6 +63,19 @@ const SignUpScreen = () => {
           value={email}
           setValue={setEmail}
         />
+        <CustomInput
+          placeholder="Enter your full name"
+          value={fullname}
+          setValue={setFullname}
+        />
+
+        <CustomInput
+          placeholder="Enter your age"
+          value={age}
+          setValue={setAge}
+          keyboardType="numeric"
+        />
+
         <CustomInput
           placeholder="Enter your password"
           value={password}

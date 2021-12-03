@@ -92,18 +92,7 @@ const ProfileScreen = () => {
             {userData ? userData.age : ''}
           </Text>
         </View>
-        <View style={styles.row}>
-          <Icon name="map-marker-radius" color="#777777" size={20} />
-          <Text style={{color: '#777777', marginLeft: 20}}>
-            {userData ? userData.country : ''}
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="phone" color="#777777" size={20} />
-          <Text style={{color: '#777777', marginLeft: 20}}>
-            {userData ? userData.phone : ''}
-          </Text>
-        </View>
+
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20} />
           <Text style={{color: '#777777', marginLeft: 20}}>
@@ -127,10 +116,6 @@ const ProfileScreen = () => {
           ]}>
           <Title>{userData ? userData.climate : ''}</Title>
           <Caption>Climate</Caption>
-        </View>
-        <View style={styles.infoBox}>
-          <Title>{userData ? userData.activetime : ''}</Title>
-          <Caption>Active Time</Caption>
         </View>
       </View>
       <View style={styles.menuWrapper}>
@@ -192,7 +177,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   infoBox: {
-    width: '35%',
+    width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
   },

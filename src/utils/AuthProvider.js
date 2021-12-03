@@ -14,7 +14,7 @@ export const signIn = (email, password) => {
     });
 };
 
-export const signUp = (email, password) => {
+export const signUp = (email, password, fullname, age) => {
   auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
@@ -22,7 +22,10 @@ export const signUp = (email, password) => {
         .collection('users')
         .doc(auth().currentUser.uid)
         .set({
-          email: email,
+          fullname,
+          email,
+          age,
+          unit: 'mL',
           createdAt: firestore.Timestamp.fromDate(new Date()),
           userImg: '',
         });
