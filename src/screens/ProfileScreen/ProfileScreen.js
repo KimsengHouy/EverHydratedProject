@@ -89,10 +89,9 @@ const ProfileScreen = () => {
         <View style={styles.row}>
           <Icon name="cake" color="#777777" size={20} />
           <Text style={{color: '#777777', marginLeft: 20}}>
-            {userData ? userData.age : ''}
+            {userData ? userData.age : ''} years old
           </Text>
         </View>
-
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20} />
           <Text style={{color: '#777777', marginLeft: 20}}>
