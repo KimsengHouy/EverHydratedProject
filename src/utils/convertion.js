@@ -1,8 +1,11 @@
 export const mLToCups = (value, unit) => {
   console.log(unit, 'unit123');
-  if (unit == 'mL') {
+  console.log(value, 'value123');
+  if (unit && unit == 'mL') {
+    console.log(unit, 'naa');
     return value;
   } else {
-    return value / 250;
+    console.log(value, 'key12');
+    return 100;
   }
 };

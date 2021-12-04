@@ -31,11 +31,13 @@ const EditProfileScreen = async () => {
   const [image, setImage] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState();
 
-  const userSnapshot = await getUser();
-  if (userSnapshot.exists) {
-    console.log('User Data', userSnapshot.data());
-    setUserData(userSnapshot.data());
-  }
+  const setUser = async () => {
+    const userSnapshot = await getUser();
+    if (userSnapshot.exists) {
+      console.log('User Data', userSnapshot.data());
+      setUserData(userSnapshot.data());
+    }
+  };
 
   const handleUpdate = async () => {
     let imgUrl = await uploadImage();
@@ -115,7 +117,7 @@ const EditProfileScreen = async () => {
   };
 
   useEffect(() => {
-    getUser();
+    setUser();
   }, []);
 
   const takePhotoFromCamera = () => {

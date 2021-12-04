@@ -53,18 +53,20 @@ const renderConfetti = () => {
   return <ConfettiCannon count={100} origin={{x: 0, y: 0}} fadeOut={true} />;
 };
 
-const HomeScreen = async () => {
+const HomeScreen = () => {
   const [userData, setUserData] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const userSnapshot = await getUser();
-  if (userSnapshot.exists) {
-    console.log('User Data', userSnapshot.data());
-    setUserData(userSnapshot.data());
-  }
+  const setUser = async () => {
+    const userSnapshot = await getUser();
+    if (userSnapshot.exists) {
+      console.log('User Data', userSnapshot.data());
+      setUserData(userSnapshot.data());
+    }
+  };
 
   useEffect(() => {
-    getUser();
+    setUser();
     navigation.addListener('focus', () => setLoading(!loading));
   }, [navigation, loading]);
   const navigation = useNavigation();
