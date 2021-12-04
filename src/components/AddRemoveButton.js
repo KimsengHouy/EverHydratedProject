@@ -3,6 +3,7 @@ import {View, TouchableOpacity, Text, Animated} from 'react-native';
 import {RotationGestureHandler} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {mLToCups} from '../utils/convertion';
+import {updateUser} from '../utils/database';
 
 export const AddRemoveButton = ({
   amount,
@@ -42,11 +43,18 @@ export const AddRemoveButton = ({
     <TouchableOpacity
       style={{alignItems: 'center', padding: 5}}
       onPress={() => {
-        operation == 'add'
-          ? setValue(value + amount)
-          : value - amount < 0
-          ? setValue(0)
-          : setValue(value - amount);
+        const updateValue =
+          operation == 'add'
+            ? value + amount
+            : value - amount < 0
+            ? 0
+            : value - amount;
+        setValue(updateValue);
+
+        console.log(updateValue, '12value');
+
+        updateUser({waterDrank: updateValue});
+
         startShake();
       }}>
       <View

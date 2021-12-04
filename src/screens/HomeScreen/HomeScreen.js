@@ -25,6 +25,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {mLToCups} from '../../utils/convertion';
 import {getUser} from '../../utils/database';
+import {updateUser} from '../../utils/database';
 
 const amounts = [250, 500, 1000, 1500];
 
@@ -54,21 +55,43 @@ const renderConfetti = () => {
 };
 
 const HomeScreen = () => {
-  const [userData, setUserData] = useState(false);
+  const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [waterGoal, setWaterGoal] = useState(3000);
+  const [waterDrank, setWaterDrank] = useState(0);
+  const {height} = useWindowDimensions();
+
+  const [fillingPercentage, setFillingPercentage] = useState(0);
+
+  const [isGoalAchieved, setIsGoalAchieved] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const setUser = async () => {
+    console.log('setuser');
     const userSnapshot = await getUser();
+    console.log('usersnap', userSnapshot);
     if (userSnapshot.exists) {
       console.log('User Data', userSnapshot.data());
-      setUserData(userSnapshot.data());
+      console.log('userdata2', userData);
+      await setUserData(userSnapshot.data());
+      console.log('userdata3', userData);
+      console.log('watergoal', userSnapshot.get('waterGoal'));
+      setWaterGoal(
+        userSnapshot.get('waterGoal') ? userSnapshot.get('waterGoal') : 3000,
+      );
+
+      setWaterDrank(
+        userSnapshot.get('waterDrank') ? userSnapshot.get('waterDrank') : 0,
+      );
     }
   };
 
   useEffect(() => {
     setUser();
+
     navigation.addListener('focus', () => setLoading(!loading));
   }, [navigation, loading]);
+
   const navigation = useNavigation();
 
   const Dashboard = () => {
@@ -78,13 +101,6 @@ const HomeScreen = () => {
   const onLogoutPressed = () => {
     console.warn('Logout');
   };
-  const {height} = useWindowDimensions();
-
-  const [fillingPercentage, setFillingPercentage] = useState(0);
-  const [waterGoal, setWaterGoal] = useState(3000);
-  const [waterDrank, setWaterDrank] = useState(0);
-  const [isGoalAchieved, setIsGoalAchieved] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const updatewaterGoal = () => {};
 
@@ -157,13 +173,13 @@ const HomeScreen = () => {
           }}>
           Welcome
         </Text>
-        <Text style={{fontSize: 10, alignSelf: 'center', color: '#21B6A8'}}>
+        <Text style={{fontSize: 13, alignSelf: 'center', color: '#21B6A8'}}>
           Thousands Have Lived Without Love, Not One Without Water.
         </Text>
         {showConfetti && renderConfetti()}
         {/* Water Goal */}
         <View style={styles.waterGoalContainer}>
-          <Text style={[styles.blueText, {fontSize: 22}]}>
+          <Text style={[styles.blueText, {fontSize: 30}]}>
             {' '}
             {userData ? userData.fullname : ''} 's Hydrated Goal
           </Text>
@@ -177,12 +193,22 @@ const HomeScreen = () => {
             {/* Add Goal */}
             <TouchableOpacity
               style={{padding: 5}}
-              onPress={() => setWaterGoal(waterGoal + 250)}>
+              onPress={() => {
+                const updateValue = waterGoal + 250;
+                setWaterGoal(updateValue);
+                console.log(updateValue, '123value');
+                updateUser({waterGoal: updateValue});
+              }}>
               <Ionicons name="add-circle" size={26} color="#21B6A8" />
             </TouchableOpacity>
             <TouchableOpacity
               style={{padding: 5}}
-              onPress={() => setWaterGoal(waterGoal - 250)}>
+              onPress={() => {
+                const updateValue = waterGoal - 250;
+                setWaterGoal(updateValue);
+                console.log(updateValue, '1234value');
+                updateUser({waterGoal: updateValue});
+              }}>
               <Ionicons name="remove-circle" size={26} color="#FF0000" />
             </TouchableOpacity>
           </View>

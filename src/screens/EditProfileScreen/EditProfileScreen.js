@@ -24,7 +24,7 @@ import storage from '@react-native-firebase/storage';
 import {Picker} from '@react-native-picker/picker';
 import {getUser} from '../../utils/database';
 
-const EditProfileScreen = async () => {
+const EditProfileScreen = () => {
   const [uploading, setUploading] = useState(false);
   const [userData, setUserData] = useState(false);
   const [transferred, setTransferred] = useState(0);

@@ -14,26 +14,27 @@ export const signIn = (email, password) => {
     });
 };
 
-export const signUp = (email, password, fullname, age) => {
-  auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      firestore()
-        .collection('users')
-        .doc(auth().currentUser.uid)
-        .set({
-          fullname,
-          email,
-          age,
-          unit: 'mL',
-          createdAt: firestore.Timestamp.fromDate(new Date()),
-          userImg: '',
-        });
-      ToastAndroid.show('Logged in', ToastAndroid.SHORT);
-    })
-    .catch(e => {
-      Alert.alert(e.message);
-    });
+export const signUp = async (email, password, fullname, age) => {
+  try {
+    await auth().createUserWithEmailAndPassword(email, password);
+
+    await firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .set({
+        fullname,
+        email,
+        age,
+        unit: 'mL',
+        waterGoal: 3000,
+        waterDrank: 0,
+        createdAt: firestore.Timestamp.fromDate(new Date()),
+        userImg: '',
+      });
+    ToastAndroid.show('Logged in', ToastAndroid.SHORT);
+  } catch (e) {
+    Alert.alert(e.message);
+  }
 };
 
 export const signOut = () => {

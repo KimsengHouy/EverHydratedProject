@@ -27,10 +27,10 @@ const SignUpScreen = () => {
 
   const navigation = useNavigation();
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = async () => {
     if (email != '' && password != '' && confrimPassword != '') {
       if (password == confrimPassword) {
-        signUp(email, password, fullname, age);
+        await signUp(email, password, fullname, age);
       } else {
         Alert.alert('password did not match');
       }
