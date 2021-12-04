@@ -94,7 +94,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              800 mL - 1000 mL
+              800 mL - 1000 mL / 3 cups
             </Title>
           </View>
         </View>
@@ -117,7 +117,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              1100 mL - 1200 mL
+              1100 mL - 1200 mL / 4 cups
             </Title>
           </View>
         </View>
@@ -140,7 +140,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              1300 mL
+              1300 mL / 5 cups
             </Title>
           </View>
         </View>
@@ -163,7 +163,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              1600 mL
+              1600 mL / 6 cups
             </Title>
           </View>
         </View>
@@ -186,7 +186,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              1900 mL
+              1900 mL / 7 cups
             </Title>
           </View>
         </View>
@@ -209,7 +209,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              2100 mL
+              2100 mL / 8 cups
             </Title>
           </View>
         </View>
@@ -232,7 +232,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              2000 mL
+              2000 mL / 9 cups
             </Title>
           </View>
         </View>
@@ -255,7 +255,7 @@ const RecommendedScreen = () => {
                 marginLeft: 5,
                 justifyContent: 'center',
               }}>
-              2500 mL
+              2500 mL / 10 cups
             </Title>
           </View>
         </View>
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#21B6A8',
     borderTopWidth: 1,
     flexDirection: 'row',
-    height: 50,
+    height: 60,
   },
   infoBoxWrapper3: {
     borderBottomColor: '#21B6A8',
@@ -324,7 +324,6 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     width: '50%',
-
     justifyContent: 'space-evenly',
   },
   menuWrapper: {

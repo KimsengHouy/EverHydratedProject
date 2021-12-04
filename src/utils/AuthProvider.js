@@ -14,7 +14,7 @@ export const signIn = (email, password) => {
     });
 };
 
-export const signUp = async (email, password, fullname, age) => {
+export const signUp = async (email, password, fullname, age, climate) => {
   try {
     await auth().createUserWithEmailAndPassword(email, password);
 
@@ -25,6 +25,7 @@ export const signUp = async (email, password, fullname, age) => {
         fullname,
         email,
         age,
+        climate,
         unit: 'mL',
         waterGoal: 3000,
         waterDrank: 0,

@@ -21,6 +21,7 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState('');
   const [fullname, setFullname] = useState('');
   const [age, setAge] = useState('');
+  const [climate, setClimate] = useState('');
   const [confrimPassword, setConfrimPassword] = useState('');
 
   const {height} = useWindowDimensions();
@@ -30,7 +31,7 @@ const SignUpScreen = () => {
   const onSignUpPressed = async () => {
     if (email != '' && password != '' && confrimPassword != '') {
       if (password == confrimPassword) {
-        await signUp(email, password, fullname, age);
+        await signUp(email, password, fullname, age, climate);
       } else {
         Alert.alert('password did not match');
       }
@@ -59,11 +60,6 @@ const SignUpScreen = () => {
         />
         <Text style={styles.title}>Sign Up</Text>
         <CustomInput
-          placeholder="Enter your email"
-          value={email}
-          setValue={setEmail}
-        />
-        <CustomInput
           placeholder="Enter your full name"
           value={fullname}
           setValue={setFullname}
@@ -74,6 +70,18 @@ const SignUpScreen = () => {
           value={age}
           setValue={setAge}
           keyboardType="numeric"
+        />
+
+        <CustomInput
+          placeholder="Enter your climate"
+          value={climate}
+          setValue={setClimate}
+        />
+
+        <CustomInput
+          placeholder="Enter your email"
+          value={email}
+          setValue={setEmail}
         />
 
         <CustomInput

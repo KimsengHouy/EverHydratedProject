@@ -179,7 +179,7 @@ const HomeScreen = () => {
         {showConfetti && renderConfetti()}
         {/* Water Goal */}
         <View style={styles.waterGoalContainer}>
-          <Text style={[styles.blueText, {fontSize: 30}]}>
+          <Text style={[styles.blueText, {fontSize: 20}]}>
             {' '}
             {userData ? userData.fullname : ''} 's Hydrated Goal
           </Text>
