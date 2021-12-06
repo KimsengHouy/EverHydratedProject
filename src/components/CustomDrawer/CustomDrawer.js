@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   ImageBackground,
   Image,
   TouchableOpacity,
+  Switch,
 } from 'react-native';
 import {
   DrawerContentScrollView,
@@ -33,6 +34,9 @@ const CustomDrawer = props => {
   };
 
   const navigation = useNavigation();
+  const [darkMode, setDarkMode] = useState();
+
+  const toggleSwitch = value => [setswitchValue(value)];
 
   return (
     <View style={{flex: 1}}>
@@ -57,6 +61,27 @@ const CustomDrawer = props => {
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#CCCCCC'}}>
+        <TouchableOpacity style={{paddingVertical: 15}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 15,
+                fontFamily: 'Robot-Medium',
+                marginLeft: 10,
+                color: '#000000',
+              }}>
+              Dark Theme
+            </Text>
+            <Switch
+              style={{marginLeft: 100}}
+              value={darkMode}
+              onValueChange={val => {
+                setDarkMode(val);
+              }}
+            />
+          </View>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={myCustomShare} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="share-social-outline" size={22} />

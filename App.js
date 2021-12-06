@@ -21,7 +21,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const onAuthStateChanged = async user => {
-    console.log('user456', user);
     if (user) setCurrentUser(user);
     else setCurrentUser(null);
     setIsLoading(false);
