@@ -50,6 +50,7 @@
     "react-navigation": "^4.4.4",
     "react-timer-mixin": "^0.13.4",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "victory-native": "^36.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

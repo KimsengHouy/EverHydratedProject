@@ -9,6 +9,7 @@ import CustomDrawer from '../components/CustomDrawer';
 import RecommendedScreen from '../screens/RecommendedScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import DailyScreen from '../screens/DailyScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -33,6 +34,15 @@ const AppStack = () => {
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="home-outline" size={22} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Daily Report"
+        component={DailyScreen}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="bar-chart-outline" size={22} color={color} />
           ),
         }}
       />

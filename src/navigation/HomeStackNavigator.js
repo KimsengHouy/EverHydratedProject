@@ -18,6 +18,7 @@ import HelpScreen from '../screens/HelpScreen';
 import SecurityScreen from '../screens/SecurityScreen';
 import InNotiScreen from '../screens/InNotiScreen';
 import AccountScreen from '../screens/AccountScreen';
+import DailyScreen from '../screens/DailyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="HomeScreen" component={AppStack} />
+      <Stack.Screen name="DailyScreen" component={DailyScreen} />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
       <Stack.Screen name="UserDetails" component={UserAddDetailsScreen} />
