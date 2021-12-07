@@ -261,7 +261,10 @@ const EditProfileScreen = () => {
                 fontSize: 18,
                 fontWeight: 'bold',
                 color: '#000000',
-              }}></Text>
+              }}>
+              {' '}
+              {userData ? userData.fullname : ''}
+            </Text>
           </View>
           <View style={styles.action}>
             <FontAwesome name="user-o" size={20} />
