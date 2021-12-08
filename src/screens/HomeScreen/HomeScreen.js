@@ -12,11 +12,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Logo from '../../../assets/images/logo1.png';
-import Banner from '../../../assets/images/new2.jpg';
-import Water from '../../../assets/images/water-bottle.png';
-import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
-import WaterOption from '../../components/WaterOption';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
