@@ -1,17 +1,25 @@
-import React from 'react';
-import {View, Text, ScrollView, Dimensions, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  Dimensions,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native';
 import {
   VictoryChart,
   VictoryGroup,
   VictoryBar,
   VictoryAxis,
   VictoryLegend,
+  VictoryLine,
 } from 'victory-native';
 
 const data = {
   goaled: [
     {x: 'Day 1', y: 3000},
-    {x: 'Day 2', y: 2500},
+    {x: 'Day 2', y: 2750},
     {x: 'Day 3', y: 4000},
     {x: 'Day 4', y: 4000},
   ],
@@ -46,8 +54,28 @@ const DailyScreen = () => {
           <VictoryAxis />
           <VictoryAxis dependentAxis />
           <VictoryGroup offset={20}>
-            <VictoryBar data={data.goaled} style={{data: {fill: '#21B6A8'}}} />
-            <VictoryBar data={data.drunk} style={{data: {fill: 'blue'}}} />
+            <VictoryBar
+              animate={{
+                duration: 3000,
+                onLoad: {
+                  duration: 1500,
+                },
+              }}
+              data={data.goaled}
+              labels={({datum}) => `${datum._y}`}
+              style={{data: {fill: '#21B6A8'}}}
+            />
+            <VictoryBar
+              animate={{
+                duration: 3000,
+                onLoad: {
+                  duration: 1500,
+                },
+              }}
+              data={data.drunk}
+              labels={({datum}) => `${datum._y}`}
+              style={{data: {fill: 'blue'}}}
+            />
           </VictoryGroup>
           <VictoryLegend
             x={Dimensions.get('screen').width / 2 - 120}
@@ -57,6 +85,18 @@ const DailyScreen = () => {
               {name: 'Drunk Amount', symbol: {fill: '#21B6A8'}},
               {name: 'Goaled Amount', symbol: {fill: 'blue'}},
             ]}
+          />
+        </VictoryChart>
+        <VictoryChart>
+          <VictoryLine
+            animate={{
+              duration: 3000,
+              onLoad: {
+                duration: 1500,
+              },
+            }}
+            data={data.drunk}
+            style={{data: {stroke: '#21B6A8'}}}
           />
         </VictoryChart>
       </View>
