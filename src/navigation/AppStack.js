@@ -38,7 +38,7 @@ const AppStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Daily Report"
+        name="Daily Graph"
         component={DailyScreen}
         options={{
           drawerIcon: ({color}) => (
