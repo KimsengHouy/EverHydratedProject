@@ -126,7 +126,7 @@ const DailyScreen = () => {
           <Modal
             style={styles.modalContent}
             animationType="slide"
-            backgroundColor="#21B6A8"
+            backgroundColor="#47D3FF"
             isVisible={isModalVisible}
             onBackdropPress={() => setModalVisible(false)}
             backdropColor="white">
